@@ -22,6 +22,7 @@
 #include "Common.h"
 #include "SystemConfig.h"
 #include "revision.h"
+#include "GitRevision.h"
 
 #define CrashFolder _T("Crashes")
 #pragma comment(linker, "/DEFAULTLIB:dbghelp.lib")
@@ -412,7 +413,7 @@ void WheatyExceptionReport::GenerateExceptionReport(
     GetLocalTime(&systime);
 
     // Start out with a banner
-    _tprintf(_T("Revision: %s\r\n"), _FULLVERSION);
+    _tprintf(_T("Revision: %s\r\n"), GitRevision::GetFullVersion());
     _tprintf(_T("Date %u:%u:%u. Time %u:%u \r\n"), systime.wDay, systime.wMonth, systime.wYear, systime.wHour, systime.wMinute);
     PEXCEPTION_RECORD pExceptionRecord = pExceptionInfo->ExceptionRecord;
 
