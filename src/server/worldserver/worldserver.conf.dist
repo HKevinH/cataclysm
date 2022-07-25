@@ -89,9 +89,9 @@ LogsDir = ""
 #                     "127.0.0.1;3306;trinity;trinity;world"      - (WorldDatabaseInfo)
 #                     "127.0.0.1;3306;trinity;trinity;characters" - (CharacterDatabaseInfo)
 
-LoginDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;auth"
-WorldDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;world"
-CharacterDatabaseInfo = "127.0.0.1;3306;trinity;trinity;characters"
+LoginDatabaseInfo     = "127.0.0.1;3306;cataclysm;cataclysm;cataclysm_auth"
+CharacterDatabaseInfo = "127.0.0.1;3306;cataclysm;cataclysm;cataclysm_characters"
+WorldDatabaseInfo     = "127.0.0.1;3306;cataclysm;cataclysm;cataclysm_world"
 
 #
 #    LoginDatabase.WorkerThreads
