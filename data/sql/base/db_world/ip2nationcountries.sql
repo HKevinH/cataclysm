@@ -4,8 +4,8 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-DROP TABLE IF EXISTS `ip2nationcountries`;
-CREATE TABLE IF NOT EXISTS `ip2nationcountries` (
+DROP TABLE IF EXISTS `ip2nationCountries`;
+CREATE TABLE IF NOT EXISTS `ip2nationCountries` (
   `code` varchar(4) NOT NULL DEFAULT '',
   `iso_code_2` varchar(2) NOT NULL DEFAULT '',
   `iso_code_3` varchar(3) DEFAULT '',
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `ip2nationcountries` (
   KEY `code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DELETE FROM `ip2nationcountries`;
+DELETE FROM `ip2nationCountries`;
 /*!40000 ALTER TABLE `ip2nationcountries` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ip2nationcountries` ENABLE KEYS */;
 
