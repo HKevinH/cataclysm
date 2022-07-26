@@ -5,7 +5,7 @@
 #define _BRANCH                    "@rev_branch@"
 #define VER_COMPANYNAME_STR        "Cataclysm Developers"
 #define VER_LEGALCOPYRIGHT_STR     "(c) +2020 Cataclysm"
-#define _BUILD_DIRECTIVE           R"(@BUILDDIR@)"
+#define _BUILD_DIRECTIVE           "(@BUILDDIR@)"
 #define VER_FILEVERSION            0,0,0
 #define VER_FILEVERSION_STR        "@rev_hash@ @rev_date@ (@rev_branch@ branch)"
 #define VER_PRODUCTVERSION         VER_FILEVERSION
