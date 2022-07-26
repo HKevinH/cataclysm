@@ -12,8 +12,11 @@
 project(TrinityCore)
 
 # CMake policies (can not be handled elsewhere)
-cmake_minimum_required(VERSION 2.8)
-cmake_policy(SET CMP0005 OLD)
+cmake_minimum_required(VERSION 3.16...3.22)
+
+message(STATUS "CMake version: ${CMAKE_VERSION}")
+
+cmake_policy(SET CMP0005 NEW)
 
 # add this options before PROJECT keyword
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
