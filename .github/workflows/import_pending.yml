@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
     runs-on: ubuntu-20.04
-    if: github.repository == 'FirelandsProject/firelands-cata'
+    if: github.repository == 'FirelandsProject/cataclysm'
     steps:
       - uses: actions/checkout@v2
         with:
