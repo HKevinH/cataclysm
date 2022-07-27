@@ -8889,44 +8889,39 @@ void ObjectMgr::LoadBroadcastTextLocales()
 {
     uint32 oldMSTime = getMSTime();
 
-    _broadcastTextHelperStore.clear(); // helper store become invalid, clear it now
-
-    //                                               0   1              2              3              4              5              6              7              8              9                10               11               12               13               14               15               16
-    QueryResult result = WorldDatabase.Query("SELECT Id, MaleText_loc1, MaleText_loc2, MaleText_loc3, MaleText_loc4, MaleText_loc5, MaleText_loc6, MaleText_loc7, MaleText_loc8, FemaleText_loc1, FemaleText_loc2, FemaleText_loc3, FemaleText_loc4, FemaleText_loc5, FemaleText_loc6, FemaleText_loc7, FemaleText_loc8 FROM locales_broadcast_text");
+    //                                                0    1        2          3
+    QueryResult result = WorldDatabase.Query("SELECT ID, locale, MaleText, FemaleText FROM broadcast_text_locale");
 
     if (!result)
     {
-        TC_LOG_INFO("server.loading", ">> Loaded 0 broadcast text locales. DB table `locales_broadcast_text` is empty.");
+        TC_LOG_INFO("server.loading", ">> Loaded 0 broadcast text locales. DB table `broadcast_text_locale` is empty.");
         return;
     }
-
-    uint32 count = 0;
 
     do
     {
         Field* fields = result->Fetch();
 
         uint32 id = fields[0].GetUInt32();
+        std::string localeName = fields[1].GetString();
+        std::string MaleText = fields[2].GetString();
+        std::string FemaleText = fields[3].GetString();
+
         BroadcastTextContainer::iterator bct = _broadcastTextStore.find(id);
+
         if (bct == _broadcastTextStore.end())
         {
-            TC_LOG_INFO("sql.sql", "BroadcastText (Id: %u) in table `locales_broadcast_text` does not exist or is incompatible (bad expansions). Skipped!", id);
-            // don't load bct of higher expansions
+            TC_LOG_ERROR("sql.sql", "BroadcastText (Id: %u) in table `broadcast_text_locale` does not exist. Skipped!", id);
             continue;
         }
 
-        for (uint8 i = 1; i < TOTAL_LOCALES; ++i)
-        {
-            LocaleConstant locale = LocaleConstant(i);
-            ObjectMgr::AddLocaleString(fields[1 + (i - 1)].GetString(), locale, bct->second.MaleText);
-            ObjectMgr::AddLocaleString(fields[9 + (i - 1)].GetString(), locale, bct->second.FemaleText);
-        }
-
-        ++count;
+        LocaleConstant locale = GetLocaleByName(localeName);
+        AddLocaleString(MaleText, locale, bct->second.MaleText);
+        AddLocaleString(FemaleText, locale, bct->second.FemaleText);
     }
     while (result->NextRow());
 
-    TC_LOG_INFO("server.loading", ">> Loaded %u broadcast text locales in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
+    TC_LOG_INFO("server.loading", ">> Loaded %u broadcast text locales in %u ms", uint32(_broadcastTextStore.size()), GetMSTimeDiffToNow(oldMSTime));
 }
 
 void ObjectMgr::LoadBroadcastTextHelpers()
